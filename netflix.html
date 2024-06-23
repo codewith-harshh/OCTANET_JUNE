@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hello this is my first web page!." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Netflix India - Watch TV Shows Online, Watch Movies Online</title>
+    <link rel="icon" href="http://pngimg.com/uploads/netflix/small/netflix_PNG15.png" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 3% 5%;
+            z-index: 10;
+        }
+
+        .navbar__brand {
+            width: 100px;
+            height: 100%;
+        }
+
+        .brand__logo {
+            width: 100%;
+            height: 100%;
+        }
+
+        .language__drop__down {
+            background: transparent;
+            border: none;
+            color: white;
+        }
+
+        .language__drop__down:focus {
+            outline: none;
+        }
+
+        .language__drop__down option {
+            background-color: black;
+        }
+
+        .dropdown__container {
+            border: 1px solid white;
+            padding: 0.4rem;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .signin__button {
+            background-color: #dc030f;
+            border: 1px solid #dc030f;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .navbar__nav__items {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero__bg__image__container {
+            width: 100%;
+            height: 80vh;
+        }
+
+        .hero__bg__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero__bg__overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 80vh;
+            background: rgba(0, 0, 0, 0.4);
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .hero__card {
+            position: absolute;
+            top: 20%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hero__title {
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        .hero__subtitle,
+        .hero__description {
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        .hero__description {
+            margin: 0 50px;
+        }
+
+        .email__input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            padding-left: 7px;
+        }
+
+        .email__label {
+            color: black;
+            position: absolute;
+            top: 28%;
+            left: 2%;
+            color: rgb(153, 149, 149);
+            transition: 0.5s;
+        }
+
+        .email__form__container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .form__container {
+            background-color: white;
+            width: 90%;
+            height: 50px;
+            position: relative;
+        }
+
+        .email__input:focus + .email__label {
+            top: 0.2rem;
+            font-size: 10px;
+        }
+
+        .email__input:not(:placeholder-shown).email__input:not(:focus) + .email__label {
+            top: 0.2rem;
+            font-size: 10px;
+        }
+
+        .email__input:focus-visible {
+            outline: none;
+        }
+
+        .primary__button {
+            background-color: #dc030f;
+            border: 1px solid #dc030f;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 2px;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        .feature {
+            border-top: 8px solid #222;
+            padding: 2rem 1rem;
+        }
+
+        .feature__details {
+            text-align: center;
+        }
+
+        .feature__title {
+            font-size: 25px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .feature__sub__title {
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .feature__image__container {
+            width: 100%;
+            position: relative;
+        }
+
+        .feature__image {
+            width: 100%;
+        }
+
+        .feature__backgroud__video__container {
+            position: absolute;
+            width: 100%;
+            top: 20%;
+            left: 13%;
+            height: 100%;
+            max-width: 73%;
+            max-height: 54%;
+            z-index: -2;
+        }
+
+        .feature__backgroud__video {
+            width: 100%;
+        }
+
+        .feature__2__poster__container {
+            position: absolute;
+            bottom: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 16em;
+            display: flex;
+            align-items: center;
+            background-color: black;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            height: 60px;
+            padding: 0.25rem 0.6rem;
+            gap: 15px;
+        }
+
+        .poster__container {
+            width: 20%;
+        }
+
+        .poster {
+            width: 100%;
+            height: 100%;
+        }
+
+        .poster__details {
+            width: 60%;
+        }
+
+        .poster__details > h4 {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .poster__details > h6 {
+            font-size: 12px;
+            font-weight: 400;
+            color: rgb(63, 63, 246);
+        }
+
+        .download__gif__container {
+            width: 20%;
+            height: 100%;
+        }
+
+        .gif {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feature__3__backgroud__video__container {
+            max-width: 63%;
+            max-height: 47%;
+            z-index: -2;
+            top: 9%;
+            left: 19%;
+        }
+
+        .FAQ__accordian {
+            width: 100%;
+        }
+
+        .FAQ__title {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-size: 18px;
+            background-color: #303030;
+            border: 1px solid #303030;
+            color: white;
+        }
+
+        .FAQ__visible {
+            background-color: #303030;
+            border-top: 1px solid black;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .FAQ__visible > p {
+            margin: 1rem;
+        }
+
+        .FAQ__list__container {
+            border-top: 8px solid #222;
+            padding: 2rem 0;
+        }
+
+        .FAQ__heading {
+            font-size: 20px;
+            text-align: center;
+            font-weight: 600;
+            margin: 1rem 3rem;
+        }
+
+        .FAQ__list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .FAQ__get__started__email {
+            text-align: center;
+        }
+
+        .FAQ__get__started__email > p {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 1rem 2rem;
+        }
+
+        .FAQ__get__started__email .email__form__container {
+            width: 100%;
+        }
+
+        .FAQ__get__started__email .form__container {
+            width: 35%;
+        }
+
+        .FAQ__get__started__email .primary__button {
+            padding: 1rem 1.4rem;
+        }
+
+        .FAQ__get__started__email .email__input {
+            font-size: 18px;
+        }
+
+        footer {
+            padding: 2rem 4rem;
+            font-size: 12px;
+        }
+
+        .footer__links {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(100px, 1fr));
+            gap: 10px 40px;
+            width: 80%;
+        }
+
+        .footer__links > p {
+            color: rgb(153, 149, 149);
+        }
+
+        .footer__title {
+            margin-bottom: 2rem;
+        }
+
+        .footer__brand {
+            margin: 1rem 0;
+        }
+
+        .footer__select {
+            border: 1px solid rgb(153, 149, 149);
+            background: none;
+            color: rgb(153, 149, 149);
+            padding: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .footer__select > option {
+            background-color: black;
+        }
+
+        @media (max-width: 700px) {
+            .hero__bg__image__container {
+                height: 40vh;
+            }
+
+            .feature__backgroud__video__container {
+                display: none;
+            }
+
+            .feature__2__poster__container {
+                display: none;
+            }
+
+            .feature__3__backgroud__video__container {
+                display: none;
+            }
+
+            .FAQ__get__started__email .form__container {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .FAQ__heading {
+                font-size: 18px;
+            }
+
+            .FAQ__get__started__email > p {
+                font-size: 14px;
+            }
+
+            .FAQ__get__started__email .primary__button {
+                font-size: 10px;
+            }
+
+            .hero__title {
+                font-size: 15px;
+            }
+
+            .hero__subtitle,
+            .hero__description {
+                font-size: 10px;
+            }
+
+            .email__label {
+                top: 30%;
+                font-size: 15px;
+            }
+
+            .FAQ__get__started__email .form__container {
+                width: 90%;
+            }
+
+            footer {
+                padding: 2rem;
+            }
+
+            .footer__links {
+                grid-template-columns: repeat(2, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img class="brand__logo" src="https://1000logos.net/wp-content/uploads/2017/05/Netflix-Logo-2006.png" alt="Netflix logo">
+        </div>
+        <nav class="navbar__nav__items">
+            <div class="dropdown__container">
+                <select class="language__drop__down">
+                    <option value="eng">English</option>
+                    <option value="hin">Hindi</option>
+                </select>
+            </div>
+            <div>
+                <button class="signin__button">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero__bg__image__container">
+            <img class="hero__bg__image" src="https://assets.nflxext.com/ffe/siteui/vlv3/d348de9b-47d4-4c06-8184-2e44e2e01d05/1c78a804-e7d4-4134-94ab-0c605e2a717b/IN-en-20230605-popsignuptwoweeks-perspective_alpha_website_medium.jpg" alt="Hero Background Image">
+        </div>
+        <div class="hero__bg__overlay"></div>
+        <div class="hero__card">
+            <div class="hero__title">
+                Unlimited movies, TV shows, and more.
+            </div>
+            <div class="hero__subtitle">
+                Watch anywhere. Cancel anytime.
+            </div>
+            <div class="hero__description">
+                Ready to watch? Enter your email to create or restart your membership.
+            </div>
+            <div class="email__form__container">
+                <form class="form__container">
+                    <input type="email" id="email" class="email__input" required placeholder=" ">
+                    <label for="email" class="email__label">Email address</label>
+                </form>
+                <button class="primary__button">Get Started ></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature">
+        <div class="feature__details">
+            <h3 class="feature__title">Enjoy on your TV.</h3>
+            <p class="feature__sub__title">Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+        </div>
+        <div class="feature__image__container">
+            <img class="feature__image" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png" alt="TV Feature Image">
+            <div class="feature__backgroud__video__container">
+                <video class="feature__backgroud__video" autoplay playsinline muted loop>
+                    <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv.m4v" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature">
+        <div class="feature__details">
+            <h3 class="feature__title">Download your shows to watch offline.</h3>
+            <p class="feature__sub__title">Save your favourites easily and always have something to watch.</p>
+        </div>
+        <div class="feature__image__container">
+            <img class="feature__image" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg" alt="Mobile Feature Image">
+            <div class="feature__2__poster__container">
+                <div class="poster__container">
+                    <img class="poster" src="https://occ-0-4440-1361.1.nflxso.net/art/238a6/238a660dcdd626d0c995ed2d2211d387c8e208ba.jpg" alt="Stranger Things Poster">
+                </div>
+                <div class="poster__details">
+                    <h4>Stranger Things</h4>
+                    <h6>Downloading...</h6>
+                </div>
+                <div class="download__gif__container">
+                    <img class="gif" src="https://media.giphy.com/media/KZsmhKYbi7e0k/source.gif" alt="Download GIF">
+                </div>
+            </div>
+        </div>
+
+
+    <footer>
+        <p>Questions? Call 000-800-040-1843</p>
+        <div class="footer__links">
+            <div>
+                <p class="footer__title">FAQ</p>
+                <p>Help Centre</p>
+                <p>Account</p>
+                <p>Terms of Use</p>
+                <p>Privacy</p>
+                <p>Contact Us</p>
+            </div>
+            <div>
+                <p class="footer__title">Audio and Subtitles</p>
+                <p>Help Centre</p>
+                <p>Privacy</p>
+                <p>Legal Notices</p>
+                <p>Corporate Information</p>
+            </div>
+            <div>
+                <p class="footer__title">Service Code</p>
+            </div>
+            <div>
+                <select class="footer__select">
+                    <option value="eng">English</option>
+                    <option value="hin">Hindi</option>
+                    <option value="fr">French</option>
+                    <option value="ger">German</option>
+                </select>
+            </div>
+        </div>
+        <p class="footer__brand">Netflix India</p>
+    </footer>
+</body>
+</html>
+
